@@ -5,6 +5,7 @@ $light-size: 50px;
 $red: #f99;
 $amber: #ff9;
 $green: #9f9;
+$button-colour: #99f;
 
 
 // ----- General ----- //
@@ -12,14 +13,19 @@ $green: #9f9;
 html, body {
 	margin: 0;
 	padding: 0;
+	width: 100%;
+}
+
+.main-wrapper {
+	width: 100%;
 }
 
 
 // ----- Lights ----- //
 
 .traffic-light {
-	margin: auto;
 	width: 70px;
+	margin: 0 auto 30px;
 }
 
 .traffic-light__light {
@@ -40,4 +46,26 @@ html, body {
 
 .traffic-light__light--selected:nth-child(3) {
 	background-color: $green;
+}
+
+
+// ----- Buttons ----- //
+
+.buttons {
+	margin: 0 auto;
+	width: 265px;
+}
+
+.buttons__button {
+	border: none;
+	background-color: $button-colour;
+	color: #fff;
+	cursor: pointer;
+	margin: 0 5px;
+	padding: 5px 10px;
+	border-radius: 5px;
+
+	&:hover {
+		background-color: darken($button-colour, 10%);
+	}
 }
