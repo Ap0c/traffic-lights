@@ -1,6 +1,43 @@
+// ----- Vars ----- //
+
+$line-colour: #333;
+$light-size: 50px;
+$red: #f99;
+$amber: #ff9;
+$green: #9f9;
+
+
 // ----- General ----- //
 
 html, body {
 	margin: 0;
 	padding: 0;
+}
+
+
+// ----- Lights ----- //
+
+.traffic-light {
+	margin: auto;
+	width: 70px;
+}
+
+.traffic-light__light {
+	border: 1px solid $line-colour;
+	border-radius: 100px;
+	height: $light-size;
+	margin: 10px 10px;
+	width: $light-size;
+}
+
+.traffic-light__light--selected:nth-child(1) {
+	background-color: $red;
+}
+
+.traffic-light__light--selected:nth-child(2) {
+	background-color: $amber;
+}
+
+.traffic-light__light--selected:nth-child(3) {
+	background-color: $green;
 }
