@@ -7,9 +7,14 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // ----- Config ----- //
 
 module.exports = {
-    entry: ['./assets/javascript/react.js', './assets/stylesheets/main.scss'],
+    entry: {
+    	css: './assets/stylesheets/main.scss',
+    	react: './assets/javascript/react.js',
+    	react_redux: './assets/javascript/react_redux.js'
+    },
     output: {
-		filename: './build/react.js'
+		filename: '[name].js',
+		path: path.join(__dirname, 'build')
     },
     module: {
 		rules: [
@@ -29,7 +34,7 @@ module.exports = {
     },
     plugins: [
     	new ExtractTextPlugin({
-    		filename: './build/main.css',
+    		filename: 'main.css',
     		allChunks: true
     	})
     ]

@@ -21,7 +21,7 @@ app.get('/react', (req, res) => {
 });
 
 app.get('/react-redux', (req, res) => {
-	res.send('Coming soon...');
+	res.sendFile(path.join(__dirname, 'pages/react_redux.html'));
 });
 
 app.get('/react-redux-flow', (req, res) => {
@@ -36,5 +36,5 @@ app.get('/react-redux-immutable', (req, res) => {
 // ----- Run ----- //
 
 app.listen(3000, () => {
-	console.log('Running... Go to http://localhost:3000')
+	console.log('Running... Go to http://localhost:3000');
 });
