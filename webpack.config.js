@@ -7,9 +7,9 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // ----- Config ----- //
 
 module.exports = {
-    entry: ['./assets/javascript/index.js', './assets/stylesheets/main.scss'],
+    entry: ['./assets/javascript/react.js', './assets/stylesheets/main.scss'],
     output: {
-		filename: './build/app.js'
+		filename: './build/react.js'
     },
     module: {
 		rules: [
