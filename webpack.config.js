@@ -1,20 +1,36 @@
+// ----- Imports ----- //
+
 const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+
+// ----- Config ----- //
 
 module.exports = {
-    entry: './src/index.js',
+    entry: ['./assets/javascript/index.js', './assets/stylesheets/main.scss'],
     output: {
-	filename: './build/app.js'
+		filename: './build/app.js'
     },
     module: {
-	rules: [
-	    {
-		test: /\.js$/,
-		loader: 'babel-loader',
-		include: path.join(__dirname, 'src'),
-		query: {
-		    presets: ['react']
-		}
-	    }
-	]
-    }
+		rules: [
+		    {
+				test: /\.js$/,
+				loader: 'babel-loader',
+				include: path.join(__dirname, 'assets'),
+				query: {
+				    presets: ['react']
+				}
+		    },
+		    {
+		    	test: /\.scss$/,
+		    	loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader'])
+		    }
+		]
+    },
+    plugins: [
+    	new ExtractTextPlugin({
+    		filename: './build/main.css',
+    		allChunks: true
+    	})
+    ]
 };
