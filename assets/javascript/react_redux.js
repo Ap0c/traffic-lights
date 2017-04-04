@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { render } from 'react-dom';
+import { createStore } from 'redux';
+import { Provider, connect } from 'react-redux';
 
 
 // ----- Setup ----- //
@@ -17,9 +19,9 @@ const BUTTONS_STATES = {
 
 // ----- Functions ----- //
 
-function lightClasses (lightState) {
+function lightClasses (lightStage) {
 
-	switch (lightState) {
+	switch (lightStage) {
 
 		case ('GO'):
 			return { red: '', amber: '', green: SELECTED_LIGHT };
@@ -37,11 +39,32 @@ function lightClasses (lightState) {
 }
 
 
+// ----- Actions ----- //
+
+function changeLights (stage) {
+	return { type: 'CHANGE_LIGHTS', stage: stage };
+}
+
+
+// ----- Reducers ----- //
+
+function reducer (state = 'GO', action) {
+
+	switch (action.type) {
+		case 'CHANGE_LIGHTS':
+			return action.stage;
+		default:
+			return state;
+	}
+
+}
+
+
 // ----- Components ----- //
 
-function TrafficLight (props) {
+function TrafficLightComponent ({ stage }) {
 
-	let classes = lightClasses(props.stage);
+	let classes = lightClasses(stage);
 
 	return (
 		<figure className="traffic-light">
@@ -53,21 +76,21 @@ function TrafficLight (props) {
 
 }
 
-function Buttons (props) {
+function ButtonsComponent ({ dispatch }) {
 
 	const buttonData = [
-		{ text: 'Go', value: 'go' },
-		{ text: 'Stopping', value: 'stopping' },
-		{ text: 'Stop', value: 'stop' },
-		{ text: 'Going', value: 'going' }
+		{ text: 'Go', stage: 'GO' },
+		{ text: 'Stopping', stage: 'STOPPING' },
+		{ text: 'Stop', stage: 'STOP' },
+		{ text: 'Going', stage: 'GOING' }
 	];
 
 	const buttons = buttonData.map(data => {
 
 		const attrs = {
 			className: 'buttons__button',
-			key: data.value,
-			onClick: () => props.onClick(data.value)
+			key: data.stage,
+			onClick: () => dispatch(changeLights(data.stage))
 		};
 
 		return <button {...attrs}>{data.text}</button>;
@@ -78,30 +101,31 @@ function Buttons (props) {
 
 }
 
-class App extends React.Component {
 
-	constructor (props) {
-		super(props);
-		this.state = { stage: props.stage };
-		this.handleButtonClick = this.handleButtonClick.bind(this);
-	}
+// ----- App ----- //
 
-	handleButtonClick (button) {
-		this.setState({ stage: BUTTONS_STATES[button] });
-	}
+const TrafficLight = connect(state => ({ stage: state }))(TrafficLightComponent);
+const Buttons = connect()(ButtonsComponent);
 
-	render () {
-		return (
-			<div className="main-wrapper">
-				<TrafficLight stage={this.state.stage} />
-				<Buttons onClick={this.handleButtonClick} />
-			</div>
-		);
-	}
+function App () {
+
+	return (
+		<div className="main-wrapper">
+			<TrafficLight />
+			<Buttons />
+		</div>
+	);
 
 }
 
 
-// ----- Render ----- //
+// ----- Run ----- //
 
-render(<App stage="GO" />, document.getElementById('app'));
+const store = createStore(reducer);
+
+render(
+	<Provider store={store}>
+		<App />
+	</Provider>,
+	document.getElementById('app')
+);
