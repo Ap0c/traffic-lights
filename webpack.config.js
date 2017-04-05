@@ -9,8 +9,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
     entry: {
     	css: './assets/stylesheets/main.scss',
-    	react: './assets/javascript/react.js',
-    	react_redux: './assets/javascript/react_redux.js'
+    	react: './assets/javascript/react/react.js',
+    	react_redux: './assets/javascript/react_redux/react_redux.js'
     },
     output: {
 		filename: '[name].js',
