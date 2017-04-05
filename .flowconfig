@@ -1,0 +1,8 @@
+[ignore]
+
+[include]
+assets/javascript/react_redux_flow
+
+[libs]
+
+[options]

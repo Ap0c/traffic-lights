@@ -10,7 +10,8 @@ module.exports = {
     entry: {
     	css: './assets/stylesheets/main.scss',
     	react: './assets/javascript/react/react.js',
-    	react_redux: './assets/javascript/react_redux/react_redux.js'
+    	react_redux: './assets/javascript/react_redux/react_redux.js',
+    	react_redux_flow: './assets/javascript/react_redux_flow/react_redux_flow.js'
     },
     output: {
 		filename: '[name].js',
@@ -23,7 +24,7 @@ module.exports = {
 				loader: 'babel-loader',
 				include: path.join(__dirname, 'assets'),
 				query: {
-				    presets: ['react']
+				    presets: ['react', 'flow']
 				}
 		    },
 		    {
