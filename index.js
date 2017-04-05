@@ -24,8 +24,12 @@ app.get('/react-redux', (req, res) => {
 	res.sendFile(path.join(__dirname, 'pages/react_redux.html'));
 });
 
+app.get('/preact-redux', (req, res) => {
+	res.sendFile(path.join(__dirname, 'pages/preact_redux.html'));
+});
+
 app.get('/react-redux-flow', (req, res) => {
-	res.send('Coming soon...');
+	res.sendFile(path.join(__dirname, 'pages/react_redux_flow.html'));
 });
 
 app.get('/react-redux-immutable', (req, res) => {
